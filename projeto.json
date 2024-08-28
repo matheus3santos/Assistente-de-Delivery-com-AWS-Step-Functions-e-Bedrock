@@ -1,0 +1,47 @@
+{
+    "Comment": "Fluxo de pedidos de delivery",
+    "StartAt": "ReceberPedido",
+    "States": {
+      "ReceberPedido": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:123456789012:function:ReceberPedido",
+        "Next": "ValidarPagamento"
+      },
+      "ValidarPagamento": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:123456789012:function:ValidarPagamento",
+        "Next": "VerificarEstoque"
+      },
+      "VerificarEstoque": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:123456789012:function:VerificarEstoque",
+        "Next": "ConfirmarPedido"
+      },
+      "ConfirmarPedido": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:123456789012:function:ConfirmarPedido",
+        "Next": "PrepararPedido"
+      },
+      "PrepararPedido": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:123456789012:function:PrepararPedido",
+        "Next": "NotificarCliente"
+      },
+      "NotificarCliente": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:123456789012:function:NotificarCliente",
+        "Next": "AtualizarStatusEntrega"
+      },
+      "AtualizarStatusEntrega": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:123456789012:function:AtualizarStatusEntrega",
+        "Next": "ConfirmarEntrega"
+      },
+      "ConfirmarEntrega": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:us-east-1:123456789012:function:ConfirmarEntrega",
+        "End": true
+      }
+    }
+  }
+  
